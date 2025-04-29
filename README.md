@@ -31,6 +31,7 @@ src/js/helpers.js: Utility functions for API requests.
 src/js/config.js: Configuration constants (e.g., API URL, timeouts).
 
 USAGE
+
 Search for recipes using the search bar.
 Click a recipe to view details or bookmark it.
 Adjust servings to update ingredient quantities.
