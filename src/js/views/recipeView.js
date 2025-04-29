@@ -8,10 +8,22 @@ class RecipeView extends View {
   _errorMessage = 'We could not find that recipe. Please try another one!';
   _message = '';
 
+  /**
+   * Adds event listeners for rendering the recipe on hash change or page load.
+   *
+   * @param {Function} handler The callback function to execute on hash change or load.
+   * @this {Object} RecipeView instance
+   */
   addHandlerRender(handler) {
     ['hashchange', 'load'].forEach(e => window.addEventListener(e, handler));
   }
 
+  /**
+   * Adds an event listener for updating the number of servings when a button is clicked.
+   *
+   * @param {Function} handler The callback function to execute with the new servings number.
+   * @this {Object} RecipeView instance
+   */
   addHandlerUpdateServings(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--update-servings');
@@ -22,6 +34,12 @@ class RecipeView extends View {
     });
   }
 
+  /**
+   * Adds an event listener for toggling the bookmark status when the bookmark button is clicked.
+   *
+   * @param {Function} handler The callback function to execute on bookmark button click.
+   * @this {Object} RecipeView instance
+   */
   addHandlerAddBookmark(handler) {
     this._parentElement.addEventListener('click', function (e) {
       const btn = e.target.closest('.btn--bookmark');
@@ -30,6 +48,12 @@ class RecipeView extends View {
     });
   }
 
+  /**
+   * Generates the HTML markup for the recipe details.
+   *
+   * @returns {string} The HTML markup string for the recipe.
+   * @this {Object} RecipeView instance
+   */
   _generateMarkup() {
     return `
     <figure class="recipe__fig">
@@ -122,6 +146,13 @@ class RecipeView extends View {
     `;
   }
 
+  /**
+   * Generates the HTML markup for a single ingredient.
+   *
+   * @param {Object} ing The ingredient object with quantity, unit, and description.
+   * @returns {string} The HTML markup string for the ingredient.
+   * @this {Object} RecipeView instance
+   */
   _generateMurkupIngridient(ing) {
     return `
     <li class="recipe__ingredient">

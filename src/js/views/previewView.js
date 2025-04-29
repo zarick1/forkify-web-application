@@ -4,6 +4,12 @@ import icons from 'url:../../img/icons.svg';
 class PreviewView extends View {
   _parentElement = '';
 
+  /**
+   * Generates the HTML markup for a single recipe preview.
+   *
+   * @returns {string} The HTML markup string for the recipe preview.
+   * @this {Object} PreviewView instance
+   */
   _generateMarkup() {
     const id = window.location.hash.slice(1);
 

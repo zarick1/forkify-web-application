@@ -10,12 +10,23 @@ class addRecipeView extends View {
   _message = 'Recipe was successfully uploaded';
   _btnAddRecipe = document.querySelector('.nav__btn--add-recipe');
 
+  /**
+   * Initializes the view by setting up event handlers for showing and hiding the modal window.
+   *
+   * @this {Object} AddRecipeView instance
+   */
   constructor() {
     super();
     this._addHandlerShowWindow();
     this._addHandlerHideWindow();
   }
 
+  /**
+   * Adds an event listener to handle form submission for uploading a new recipe.
+   *
+   * @param {Function} handler The callback function to execute with the form data.
+   * @this {Object} AddRecipeView instance
+   */
   addHandlerUpload(handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -26,15 +37,30 @@ class addRecipeView extends View {
     });
   }
 
+  /**
+   * Toggles the visibility of the modal window and overlay.
+   *
+   * @this {Object} AddRecipeView instance
+   */
   toggleWindow() {
     this._overlay.classList.toggle('hidden');
     this._window.classList.toggle('hidden');
   }
 
+  /**
+   * Adds an event listener to show the modal window when the "Add Recipe" button is clicked.
+   *
+   * @this {Object} AddRecipeView instance
+   */
   _addHandlerShowWindow() {
     this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
   }
 
+  /**
+   * Adds event listeners to hide the modal window when the close button or overlay is clicked.
+   *
+   * @this {Object} AddRecipeView instance
+   */
   _addHandlerHideWindow() {
     this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
     this._overlay.addEventListener('click', this.toggleWindow.bind(this));
@@ -42,6 +68,11 @@ class addRecipeView extends View {
 
   _generateMarkup() {}
 
+  /**
+   * Renders the form for uploading a new recipe to the DOM.
+   *
+   * @this {Object} AddRecipeView instance
+   */
   renderUploadForm() {
     const markup = `
 

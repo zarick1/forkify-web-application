@@ -10,11 +10,13 @@ import 'core-js/stable';
 import 'regenerator-runtime/runtime';
 import { CalculationInterpolation } from 'sass';
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
-
 //////////////////////////////////////
+/**
+ * Asynchronously loads and renders a recipe based on the URL hash ID.
+ *
+ * @returns {Promise<void>} A promise that resolves when the recipe is loaded and rendered.
+ * @throws {Error} If the recipe cannot be loaded or rendered.
+ */
 const controlRecipes = async function () {
   try {
     const id = window.location.hash.slice(1);
@@ -38,6 +40,12 @@ const controlRecipes = async function () {
   }
 };
 
+/**
+ * Asynchronously loads and renders search results based on the user's query.
+ *
+ * @returns {Promise<void>} A promise that resolves when search results are loaded and rendered.
+ * @throws {Error} If the search query is invalid or the results cannot be loaded.
+ */
 const controlSearchResults = async function () {
   try {
     // 1) Get search query
@@ -55,10 +63,15 @@ const controlSearchResults = async function () {
     // 3) Render pagination
     paginationView.render(model.state.search);
   } catch (err) {
-    resultsView.renderError(err);
+    resultsView.renderError(err.message);
   }
 };
 
+/**
+ * Renders the search results and pagination for the specified page.
+ *
+ * @param {number} goToPage - The page number to display.
+ */
 const controlPagination = function (goToPage) {
   // Render next/prev page
   resultsView.render(model.getSearchResultsPage(goToPage));
@@ -66,6 +79,11 @@ const controlPagination = function (goToPage) {
   paginationView.render(model.state.search);
 };
 
+/**
+ * Updates the recipe servings and refreshes the recipe view.
+ *
+ * @param {number} newServings - The new number of servings for the recipe.
+ */
 const controlServings = function (newServings) {
   // Update the recipe servings
   model.updateServings(newServings);
@@ -73,6 +91,9 @@ const controlServings = function (newServings) {
   recipeView.update(model.state.recipe);
 };
 
+/**
+ * Toggles the bookmark status of the current recipe and updates the views.
+ */
 const controlAddBookmark = function () {
   if (model.state.recipe.bookmarked) model.deleteBookmark(model.state.recipe);
   //console.log(model.state.recipe);
@@ -83,10 +104,20 @@ const controlAddBookmark = function () {
   bookmarkView.render(model.state.bookmarks);
 };
 
+/**
+ * Renders the list of bookmarked recipes.
+ */
 const controlBookmarks = function () {
   bookmarkView.render(model.state.bookmarks);
 };
 
+/**
+ * Asynchronously uploads a new recipe and updates the application state and views.
+ *
+ * @param {Object} newRecipe - The new recipe data to be uploaded.
+ * @returns {Promise<void>} A promise that resolves when the recipe is uploaded and views are updated.
+ * @throws {Error} If the recipe upload fails or the data format is invalid.
+ */
 const controlAddRecipe = async function (newRecipe) {
   //console.log(newRecipe);
   try {
@@ -122,6 +153,9 @@ const controlAddRecipe = async function (newRecipe) {
   }
 };
 
+/**
+ * Initializes the application by setting up event handlers for views.
+ */
 const init = function () {
   bookmarkView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);

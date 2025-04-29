@@ -23,6 +23,12 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  /**
+   * Updates the DOM with new data by comparing and modifying only changed elements.
+   *
+   * @param {Object | Object[]} data The new data to update the view (e.g., recipe).
+   * @this {Object} View instance
+   */
   update(data) {
     this._data = data;
     const newMarkup = this._generateMarkup();
@@ -48,6 +54,12 @@ export default class View {
     });
   }
 
+  /**
+   * Renders an error message to the DOM.
+   *
+   * @param {string} [errorMessage=this._errorMessage] The error message to display.
+   * @this {Object} View instance
+   */
   renderError(errorMessage = this._errorMessage) {
     const markup = `
       <div class="error">
@@ -64,6 +76,12 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  /**
+   * Renders a success message to the DOM.
+   *
+   * @param {string} [message=this._message] The success message to display.
+   * @this {Object} View instance
+   */
   renderMessage(message = this._message) {
     const markup = `
       <div class="message">
@@ -80,6 +98,11 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  /**
+   * Renders a loading spinner to the DOM.
+   *
+   * @this {Object} View instance
+   */
   renderSpinner() {
     const markup = `
       <div class="spinner">
@@ -92,6 +115,11 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup);
   }
 
+  /**
+   * Clears the content of the parent element in the DOM.
+   *
+   * @this {Object} View instance
+   */
   _clear() {
     this._parentElement.innerHTML = '';
   }
